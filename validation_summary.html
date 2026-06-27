@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Validation Results</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    th { background: #f0f0f0; }
+    tr.fail { background: #fdecea; }
+    tr.pass { background: #e8f5e9; }
+  </style>
+</head>
+<body>
+  <h1>GX Validation Summary</h1>
+  <p>Overall success: False</p>
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>column</th>
+      <th>expectation</th>
+      <th>success</th>
+      <th>unexpected_count</th>
+      <th>unexpected_percent</th>
+      <th>element_count</th>
+      <th>observed_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>customer_id</td>
+      <td>expect_column_values_to_not_be_null</td>
+      <td>False</td>
+      <td>150.0</td>
+      <td>2.99</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>customer_id</td>
+      <td>expect_column_values_to_be_unique</td>
+      <td>False</td>
+      <td>568.0</td>
+      <td>11.68</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>age</td>
+      <td>expect_column_values_to_be_between</td>
+      <td>False</td>
+      <td>384.0</td>
+      <td>7.89</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>email</td>
+      <td>expect_column_values_to_match_regex</td>
+      <td>False</td>
+      <td>346.0</td>
+      <td>7.56</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>salary</td>
+      <td>expect_column_values_to_not_be_null</td>
+      <td>False</td>
+      <td>425.0</td>
+      <td>8.47</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>country</td>
+      <td>expect_column_values_to_be_in_set</td>
+      <td>False</td>
+      <td>301.0</td>
+      <td>6.05</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>signup_date</td>
+      <td>expect_column_values_to_match_regex</td>
+      <td>False</td>
+      <td>242.0</td>
+      <td>4.84</td>
+      <td>5015.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>expect_table_row_count_to_be_between</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5015.0</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

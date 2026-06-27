@@ -84,3 +84,93 @@ suite.add_expectation(
   )
 )
 
+# validate def
+val_def = context.validation_definitions.add(
+  gx.ValidationDefinition(
+    name="validate_customers",
+    data=batch_def,
+    suite=suite
+  )
+)
+
+# run and save summary as HTML file
+results = val_def.run(batch_parameters={"dataframe": df})
+print(f"\n{'='*60}")
+print(f"  OVERALL SUCCESS: {results['success']}")
+print(f"  Total rows validated: {len(df)}")
+print(f"{'='*60}\n")
+
+expectations_results = results["results"]
+
+summary = []
+for r in expectations_results:
+    exp_type  = r["expectation_config"]["type"]
+    col       = r["expectation_config"]["kwargs"].get("column", "table")
+    success   = r["success"]
+    res       = r.get("result", {})
+
+    unexpected_count   = res.get("unexpected_count")
+    unexpected_pct     = res.get("unexpected_percent")
+    element_count      = res.get("element_count")
+    observed_value     = res.get("observed_value")
+
+    status = "PASS" if success else "FAIL"
+    label  = f"{col} | {exp_type.replace('expect_', '').replace('_', ' ')}"
+
+    detail = ""
+    if unexpected_count is not None:
+        detail = f"{unexpected_count} unexpected ({unexpected_pct:.1f}%)"
+    elif observed_value is not None:
+        detail = f"observed: {observed_value}"
+
+    print(f"  [{status}]  {label}")
+    if detail:
+        print(f"          {detail}")
+
+    summary.append({
+        "column": col,
+        "expectation": exp_type,
+        "success": success,
+        "unexpected_count": unexpected_count,
+        "unexpected_percent": round(unexpected_pct, 2) if unexpected_pct is not None else None,
+        "element_count": element_count,
+        "observed_value": observed_value,
+    })
+
+print(f"\n{'='*60}")
+passed = sum(1 for s in summary if s["success"])
+print(f"  {passed}/{len(summary)} expectations passed")
+print(f"{'='*60}\n")
+
+# save to HTML file
+# Build a DataFrame from your summary list
+summary_df = pd.DataFrame(summary)
+
+# pandas has a built-in .to_html()
+html = summary_df.to_html(index=False)
+
+# Wrap in a basic page
+html_page = f"""
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Validation Results</title>
+  <style>
+    body {{ font-family: sans-serif; padding: 2rem; }}
+    table {{ border-collapse: collapse; width: 100%; }}
+    th, td {{ border: 1px solid #ccc; padding: 8px 12px; text-align: left; }}
+    th {{ background: #f0f0f0; }}
+    tr.fail {{ background: #fdecea; }}
+    tr.pass {{ background: #e8f5e9; }}
+  </style>
+</head>
+<body>
+  <h1>GX Validation Summary</h1>
+  <p>Overall success: {results['success']}</p>
+  {html}
+</body>
+</html>
+"""
+
+with open("validation_summary.html", "w") as f:
+    f.write(html_page)

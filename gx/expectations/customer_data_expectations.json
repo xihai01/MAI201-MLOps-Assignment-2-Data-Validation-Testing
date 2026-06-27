@@ -1,0 +1,94 @@
+{
+  "expectations": [
+    {
+      "id": "c346fa14-ff8c-4795-8063-4da9ff40f7d6",
+      "kwargs": {
+        "column": "customer_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "1cd17372-fec4-4e0e-b571-cc78edecf3fd",
+      "kwargs": {
+        "column": "customer_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "b4a824c6-1822-4b1f-ae15-b6b955e61ada",
+      "kwargs": {
+        "column": "age",
+        "max_value": 120.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "31a3a16b-7256-4855-9430-c14e17440745",
+      "kwargs": {
+        "column": "email",
+        "regex": "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_match_regex"
+    },
+    {
+      "id": "ff9692fc-dc57-4ec8-a286-765505b4fcc1",
+      "kwargs": {
+        "column": "salary",
+        "mostly": 0.95
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "3d165f8d-d5c0-4048-8176-18c1a711c224",
+      "kwargs": {
+        "column": "country",
+        "value_set": [
+          "USA",
+          "Canada",
+          "UK",
+          "Australia"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "29d4792e-8ab6-425c-adac-ff8836171515",
+      "kwargs": {
+        "column": "signup_date",
+        "regex": "^\\d{1,2}/\\d{1,2}/\\d{4}$"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_match_regex"
+    },
+    {
+      "id": "de17b1d2-515b-4ada-a36d-3d04b54e2adb",
+      "kwargs": {
+        "max_value": 1000,
+        "min_value": 500
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_row_count_to_be_between"
+    }
+  ],
+  "id": "fc9ce8f7-a962-4004-996e-8a11f4cac093",
+  "meta": {
+    "great_expectations_version": "1.18.2"
+  },
+  "name": "customer_data_expectations",
+  "notes": null
+}
