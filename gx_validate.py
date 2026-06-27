@@ -93,7 +93,7 @@ val_def = context.validation_definitions.add(
   )
 )
 
-# run and save summary as HTML file
+# run and output the validation summary
 results = val_def.run(batch_parameters={"dataframe": df})
 print(f"\n{'='*60}")
 print(f"  OVERALL SUCCESS: {results['success']}")
